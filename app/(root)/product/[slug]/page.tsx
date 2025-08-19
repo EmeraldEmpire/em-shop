@@ -4,7 +4,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { getProductBySlug } from '@/lib/actions/product.actions'
-import { Product } from '@/types'
 import { notFound } from 'next/navigation'
 
 const ProductDetailsPage = async (props: {
@@ -13,6 +12,10 @@ const ProductDetailsPage = async (props: {
   const { slug } = await props.params
 
   const product = await getProductBySlug(slug)
+
+  if (!product) {
+    notFound()
+  }
 
   const {
     brand,
@@ -24,11 +27,8 @@ const ProductDetailsPage = async (props: {
     description,
     stock,
     images,
-  }: any = product
+  } = product
 
-  if (!product) {
-    notFound()
-  }
   return (
     <>
       <section>
