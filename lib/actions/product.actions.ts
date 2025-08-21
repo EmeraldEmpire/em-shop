@@ -23,5 +23,5 @@ export async function getProductBySlug(slug: string) {
     },
   })
 
-  return convertToPlainObject(product)
+  return product
 }
